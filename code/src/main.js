@@ -4,4 +4,10 @@ import store from './store'
 
 import '@/assets/main.scss'
 
-createApp(App).use(store).mount('#app')
+const app = createApp(App).use(store)
+
+import './include/fa'
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"
+app.component('faIcon', FontAwesomeIcon)
+
+app.mount('#app')
