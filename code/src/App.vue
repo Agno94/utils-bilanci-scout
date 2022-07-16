@@ -173,7 +173,6 @@ export default {
     },
 
     brancaSplittedIncomesList({ data }) {
-      console.log('dataSplittedByBranca', new Date)
       if (!data || !data.length) return []
       let branche = this.branche
       let dataSplittedByBranca = {}
@@ -244,7 +243,6 @@ export default {
     processInput() {
       if (!this.hasFile) return
       this.data = []
-      console.log(new Date)
 
       try {
         this.parseCSV(this.fileContent)
@@ -275,8 +273,6 @@ export default {
           if (rowData.value <= 0) return false
           return true
         })
-
-      console.log(parsedData)
 
       this.data = parsedData
     },
