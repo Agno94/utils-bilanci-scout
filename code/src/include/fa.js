@@ -5,3 +5,6 @@ library.add(faCloudUpload)
 
 import { faGears }  from '@fortawesome/free-solid-svg-icons'
 library.add(faGears)
+
+import { faDownload }  from '@fortawesome/free-solid-svg-icons'
+library.add(faDownload)

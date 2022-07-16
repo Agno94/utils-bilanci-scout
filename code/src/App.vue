@@ -72,40 +72,11 @@
           Caricato file {{ filename }} di {{ fileContentLenght }} caratteri
         </p>
 
-        <div v-for="brancaIncomes in brancaSplittedIncomesList" :key="brancaIncomes.branca" class="box">
-
-          <section class="is-size-5 has-text-info-dark">
-            {{ brancaIncomes.alias }}
-          </section>
-
-          <p class="has-text-danger is-size-7" v-if="!brancaIncomes.incomes.length">
-            Nessuna entrata trovata
-          </p>
-
-          <table class="table" v-else>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Data1</th>
-                <th>Data2</th>
-                <th>Importo</th>
-                <th>Nota</th>
-                <th>Descrizione</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(income, index) in brancaIncomes.incomes" :key="income">
-                <th>{{index}}</th>
-                <td>{{income.data1}}</td>
-                <td>{{income.data2}}</td>
-                <td>{{income.value}}</td>
-                <td>{{income.note}}</td>
-                <td>{{income.description}}</td>
-              </tr>
-            </tbody>
-          </table>
-
-        </div>
+        <EntrateBrancaBox
+          v-for="brancaIncomes in brancaSplittedIncomesList"
+          :key="brancaIncomes.branca"
+          :brancaIncomesData="brancaIncomes"
+        />
 
       </section>
 
@@ -132,7 +103,7 @@
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
+import EntrateBrancaBox from './components/EntrateBrancaBox.vue'
 
 function readFile(file){
   return new Promise((resolve, reject) => {
@@ -149,6 +120,7 @@ export default {
   name: 'App',
 
   components: {
+    EntrateBrancaBox,
   },
 
   data() {
