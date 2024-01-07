@@ -153,6 +153,11 @@ export default {
           alias: "R/S",
           regex: /[rR][/]*[Ss][ ]*/,
         },
+        {
+          data: "capi",
+          alias: "Capi",
+          regex: /[Cc][aA][pP][iI][ ]*/,
+        },
       ]
     }
   },
