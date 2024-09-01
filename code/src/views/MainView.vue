@@ -102,28 +102,34 @@ export default {
       error: null,
       errorMessage: null,
 
-      data: [],
+      incomes: [],
+      outflows: [],
 
       branche: [
         {
-          data: "lc",
+          id: "lc",
           alias: "L/C",
           regex: /[lL][/]*[cC][ ]+/,
         },
         {
-          data: "eg",
+          id: "eg",
           alias: "E/G",
           regex: /[eE][/]*[gG][ ]+/,
         },
         {
-          data: "rs",
+          id: "rs",
           alias: "R/S",
           regex: /[rR][/]*[Ss][ ]+/,
         },
         {
-          data: "capi",
+          id: "capi",
           alias: "Capi",
           regex: /[Cc][aA][pP][iI][ ]+/,
+        },
+        {
+          id: "conti",
+          alias: "Giroconti",
+          regex: /Versamento Carta:[ ]*[0-9]+/,
         },
       ]
     }
@@ -144,13 +150,13 @@ export default {
       return fileContentLenght && (fileContentLenght > 0)
     },
 
-    brancaSplittedIncomesList({ data }) {
-      if (!data || !data.length) return []
+    brancaSplittedIncomesList({ incomes }) {
+      if (!incomes || !incomes.length) return []
       let branche = this.branche
       let dataSplittedByBranca = {}
       branche.forEach( branca => {
-        dataSplittedByBranca[branca.data] = {
-          branca: branca.data,
+        dataSplittedByBranca[branca.id] = {
+          branca: branca.id,
           alias: branca.alias,
           incomes: [],
         }
@@ -161,14 +167,14 @@ export default {
         incomes: [],
       }
 
-      data.forEach( income => {
+      incomes.forEach( income => {
         let description = income.description
         for (const branca of branche) {
           let indexOfBranca = description.search(branca.regex)
           if (indexOfBranca != -1) {
             income.note = description.slice(indexOfBranca).replace(branca.regex, '')
             income.descrition = description.slice(0,indexOfBranca)
-            dataSplittedByBranca[branca.data].incomes.push(income)
+            dataSplittedByBranca[branca.id].incomes.push(income)
             return
           }
         }
@@ -178,6 +184,12 @@ export default {
       let brancaSplittedIncomesList = []
       Object.keys(dataSplittedByBranca).forEach(key => {
         brancaSplittedIncomesList.push(dataSplittedByBranca[key])
+      })
+
+      brancaSplittedIncomesList.push({
+        branch: null,
+        alias: 'Uscite',
+        incomes: this.outflows,
       })
 
       return brancaSplittedIncomesList
@@ -214,7 +226,7 @@ export default {
 
     processInput() {
       if (!this.hasFile) return
-      this.data = []
+      this.incomes = []
 
       try {
         this.parseCSV(this.fileContent)
@@ -243,11 +255,11 @@ export default {
         .filter((rowData, index) => {
           if (index < 1) return false
           if (!rowData.description) return false
-          if (rowData.value <= 0) return false
           return true
         })
 
-      this.data = parsedData
+      this.incomes = parsedData.filter((data) => (data.value >= 0))
+      this.outflows = parsedData.filter((data) => (data.value < 0))
     },
 
   },
