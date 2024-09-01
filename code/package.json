@@ -2,43 +2,31 @@
   "name": "parser-cc-scout",
   "version": "0.2.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix"
   },
   "dependencies": {
-    "vuex": "4.0",
-    "vue": "3.2",
-    "bulma": "0.9",
     "@fortawesome/fontawesome-svg-core": "6.1",
     "@fortawesome/free-solid-svg-icons": "6.1",
     "@fortawesome/vue-fontawesome": "3.0",
-    "lodash": "4.17",
-    "luxon": "3.0"
+    "bulma": "^0.9",
+    "lodash": "^4.17",
+    "luxon": "3",
+    "sass-embedded": "^1.77",
+    "vue": "^3.4",
+    "vue-router": "^4.3",
+    "vuex": "^4.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-eslint": "~5.0.0",
-    "@vue/cli-plugin-vuex": "~5.0.0",
-    "@vue/cli-service": "~5.0.0",
-    "eslint": "7.32",
-    "eslint-plugin-vue": "8.0",
-    "sass-loader": "13.0",
-    "node-sass": "7.0"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "ecmaVersion": 2020
-    },
-    "rules": {}
+    "@vitejs/plugin-vue": "^5.0.5",
+    "eslint": "^8.57",
+    "eslint-plugin-vue": "^9.23",
+    "vite": "^5.3"
   },
   "browserslist": [
     "> 2.5%",
