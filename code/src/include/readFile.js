@@ -5,6 +5,8 @@ function readFile(file){
       resolve(fr.result )
     };
     fr.onerror = reject;
-    fr.readAsText(file.blob);
+    fr.readAsText(file);
   });
 }
+
+export default readFile
