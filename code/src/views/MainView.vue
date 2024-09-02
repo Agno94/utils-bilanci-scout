@@ -244,6 +244,7 @@ export default {
           console.log()
           let valueStr = (rowCells[2] || '')
             .replace(/[^0-9\\.\\,-]*/g, '')
+            .replace('.', '')
             .replace(',', '.')
           return {
             data1: rowCells[0],

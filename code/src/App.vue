@@ -2,7 +2,7 @@
   <section class="container">
 
     <section class="section is-small pb-1">
-      <h1 class="title">Parser Entrate C.C. Scout</h1>
+      <h1 class="title">Parser Voci Conto Corrente Scout</h1>
     </section>
 
     <!-- <RouterLink to="/">Home</RouterLink> -->
