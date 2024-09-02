@@ -29,6 +29,26 @@
       </div>
     </div>
 
+    <section class="columns" v-if="hasIncomes">
+      <section class="column">
+        Statistiche:
+      </section>
+      <section class="column is-narrow" v-for="stat in stats" :key="stat.label">
+        <div class="field has-addons">
+          <p class="control">
+            <a class="button is-static is-small">
+              {{ stat.label }}:
+            </a>
+          </p>
+          <p class="control">
+            <a class="button is-info is-static is-light is-small">
+              {{ stat.value  }}
+            </a>
+          </p>
+        </div>
+      </section>
+    </section>
+
     <p class="has-text-danger is-size-7" v-if="!hasIncomes">
       Nessuna entrata trovata
     </p>
@@ -169,6 +189,42 @@ export default {
       return incomesList.length > 0
     },
 
+    stats({incomesList, filteredIncomesList}) {
+      if (!incomesList) return []
+
+      let stats = []
+      stats.push({
+        label: 'Numero voci totali',
+        value: incomesList.length,
+      })
+
+      stats.push({
+        label: 'Numero voci filtrate',
+        value: filteredIncomesList.length,
+      })
+
+      if (!filteredIncomesList.length) return stats
+
+      let incomesValues = filteredIncomesList.map(i => i.value)
+
+      stats.push({
+        label: 'Max',
+        value: Math.max(...incomesValues),
+      })
+
+      stats.push({
+        label: 'Min',
+        value: Math.min(...incomesValues),
+      })
+
+      stats.push({
+        label: 'Somma',
+        value: incomesValues.reduce((a, b) => {return a+b}, 0),
+      })
+
+      return stats
+    }
+
   },
 
   methods: {
@@ -218,7 +274,7 @@ export default {
           index + 1,
           income.data1,
           income.data2,
-          income.value,
+          income.value.toLocaleString('it-IT', {useGrouping: false}),
           income.note,
           income.description,
         ].map(v => String(v))

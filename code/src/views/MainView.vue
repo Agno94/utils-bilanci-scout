@@ -241,7 +241,6 @@ export default {
       let parsedData = allRows
         .map(row => {
           let rowCells = row.split('\t')
-          console.log()
           let valueStr = (rowCells[2] || '')
             .replace(/[^0-9\\.\\,-]*/g, '')
             .replace('.', '')
