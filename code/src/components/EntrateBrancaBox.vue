@@ -85,7 +85,7 @@
         </section>
 
         <div class="column is-narrow">
-          <button class="button is-link is-small" :disabled="!filteredIncomesList || !hasSomeFilterActive" @click="downloadFilteredClicked">
+          <button class="button is-link is-small" :disabled="!filteredIncomesList.length || !hasSomeFilterActive" @click="downloadFilteredClicked">
             <span class="icon">
               <faIcon :icon="['fas', 'download']" />
             </span>
@@ -251,8 +251,8 @@ export default {
 
     downloadFilteredClicked() {
       if (!this.hasIncomes) return
-      if (!this.hasFilterForDescriptionActive) return
-      if (!this.filteredIncomesList) return
+      if (!this.hasFilterForDescriptionActive && !this.filterForValue) return
+      if (!this.filteredIncomesList.length) return
       this.download(this.filteredIncomesList)
     },
 
@@ -269,7 +269,7 @@ export default {
         'Descrizione',
       ].join(';')
 
-      let csv = this.incomesList.reduce( (csv, income, index) => {
+      let csv = incomesList.reduce( (csv, income, index) => {
         let row = [
           index + 1,
           income.data1,
