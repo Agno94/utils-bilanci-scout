@@ -2,7 +2,7 @@
   <div class="box">
 
     <div class="columns">
-      <div class="column is-size-5 has-text-info-dark">
+      <div class="column is-size-5 has-text-info">
         {{ brancaIncomesData.alias }}
       </div>
 
@@ -105,18 +105,20 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>Data1</th>
-            <th>Data2</th>
+            <th title="Date (Contabile - Valuta)">Date</th>
             <th>Importo</th>
-            <th>Nota</th>
+            <th class="is-narrow">Nota/Causale Principale</th>
+            <!-- <th class="is-narrow">Nota Principale</th> -->
             <th>Descrizione</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(income, index) in filteredIncomesList" :key="income">
             <th>{{index + 1}}</th>
-            <td>{{income.data1}}</td>
-            <td>{{income.data2}}</td>
+            <td>
+              <span title="Data Contabile">{{income.dataContabile}}</span><br>
+              <span title="Data Valuta">{{income.dataValuta}}</span>
+            </td>
             <td>{{income.value}}</td>
             <td class="long-text">{{income.note}}</td>
             <td class="long-text">{{income.description}}</td>
@@ -272,8 +274,8 @@ export default {
       let csv = incomesList.reduce( (csv, income, index) => {
         let row = [
           index + 1,
-          income.data1,
-          income.data2,
+          income.dataContabile,
+          income.dataValuta,
           income.value.toLocaleString('it-IT', {useGrouping: false}),
           income.note,
           income.description,

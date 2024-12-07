@@ -1,37 +1,32 @@
 {
-  "name": "parser-cc-scout",
-  "version": "0.4.0",
+  "name": "helper-contobancathiene2-frontend",
+  "version": "0.4.99",
   "private": true,
   "type": "module",
   "scripts": {
-    "serve": "vue-cli-service serve",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "cf-preview": "npm run build && wrangler pages dev ./dist",
+    "deploy": "npm run build && wrangler pages deploy ./dist",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "6.1",
-    "@fortawesome/free-solid-svg-icons": "6.1",
-    "@fortawesome/vue-fontawesome": "3.0",
-    "bulma": "^0.9",
+    "@fortawesome/fontawesome-svg-core": "^6.6",
+    "@fortawesome/free-solid-svg-icons": "^6.6",
+    "@fortawesome/vue-fontawesome": "^3.0",
+    "bulma": "^1.0",
     "lodash": "^4.17",
     "luxon": "3",
-    "sass-embedded": "^1.77",
-    "vue": "^3.4",
-    "vue-router": "^4.3",
-    "vuex": "^4.0"
+    "pinia": "^2.1.7",
+    "vue": "^3.4.29",
+    "vue-router": "^4.3.3"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.0.5",
+    "@vitejs/plugin-vue": "^5.2",
     "eslint": "^8.57",
     "eslint-plugin-vue": "^9.23",
-    "vite": "^5.3"
-  },
-  "browserslist": [
-    "> 2.5%",
-    "last 2 versions",
-    "not dead",
-    "not ie 11"
-  ]
+    "vite": "^5.4",
+    "wrangler": "^3.78.12"
+  }
 }
